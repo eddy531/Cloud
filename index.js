@@ -6,7 +6,7 @@ const knex = require('./db');
 const routes = require('./routers');
 
 const app = express(); //Crear una nueva instancia
-const port = 3000; // Puerto de salida
+const port = 3001; // Puerto de salida
 
 app.use(express.json()); //Configurar tipo de dato JSON
 
