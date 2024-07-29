@@ -8,16 +8,16 @@ module.exports = {
   development: {
     client: 'mysql2',
     connection: {
-      /*host: '44.201.167.227',
+      host: '44.201.167.227',
       user: 'api_user1',
       password: '1234',
-      database: 'cloude'*/
+      database: 'cloude'
 
 
-      host: 'localhost',
+      /*host: 'localhost',
       user: 'root',
       password: '',
-      database: 'cloud'
+      database: 'cloud'*/
     },
     migrations: {
       directory: './migrations'
