@@ -17,6 +17,21 @@ class Sale extends Model { //Creo herencia del modelo
         };
     }
 
+    static get relationMappings() {
+        const Customer = require('./Customer');
+
+        return {
+            customer: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Customer,
+                join: {
+                    from: 'sale.customer_id',
+                    to: 'customer.id'
+                }
+            }
+        };
+    }
+
     static async getAll() {//Metodo para listar clientes
         return await Sale.query();//Select*from Sale
     }
