@@ -14,7 +14,7 @@ class Employee extends Model { //Creo herencia del modelo
                 name: { type: 'string' },
                 email: { type: 'string', format: 'email' },
                 position: { type: 'string' },
-                salary: { type: 'number' }
+                salary: { type: 'string' }
             }
         };
     }

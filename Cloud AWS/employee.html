@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Customer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
+        .form-container h2 {
+            margin-top: 0;
+        }
+
+        .form-container input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-container button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!-- Aquí puedes agregar elementos de navegación si es necesario -->
+    </header>
+    <div class="container">
+        <h1>Gestión de Employee</h1>
+
+        <!-- Formulario para agregar nuevos empleados -->
+        <div class="form-container">
+            <h2>Agregar Empleado</h2>
+            <form id="user-form">
+                <input type="text" id="name" placeholder="Name" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="text" id="position" placeholder="Position">
+                <input type="text" id="salary" placeholder="Salary">
+
+                <button type="submit">Agregar Empleado</button>
+            </form>
+        </div>
+
+        <!-- Tabla para mostrar los empleados -->
+        <table id="users-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Position</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los datos se insertarán aquí -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Función para cargar los datos de los empleados
+        function loadUsers() {
+            fetch('http://localhost:3001/api/employees')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(users => {
+                    const tableBody = document.getElementById('users-table').getElementsByTagName('tbody')[0];
+                    tableBody.innerHTML = ''; // Limpiar la tabla antes de insertar nuevos datos
+
+                    users.forEach(user => {
+                        const row = tableBody.insertRow();
+                        row.insertCell(0).textContent = user.id || 'N/A';
+                        row.insertCell(1).textContent = user.name || 'N/A';
+                        row.insertCell(2).textContent = user.email || 'N/A';
+                        row.insertCell(3).textContent = user.position || 'N/A';
+                        row.insertCell(4).textContent = user.salary || 'N/A';
+                    });
+
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Función para agregar un nuevo usuario
+        function addUser(event) {
+            event.preventDefault(); // Prevenir el envío del formulario
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const position = document.getElementById('position').value;
+            const salary = document.getElementById('salary').value;
+
+            fetch('http://localhost:3001/api/employees', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, email, position, salary })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(() => {
+                    // Cargar los empleados nuevamente después de agregar uno nuevo
+                    loadUsers();
+                    // Limpiar el formulario
+                    document.getElementById('user-form').reset();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Cargar los empleados cuando se cargue la página
+        document.addEventListener('DOMContentLoaded', loadUsers);
+
+        // Manejar el envío del formulario
+        document.getElementById('user-form').addEventListener('submit', addUser);
+    </script>
+</body>
+
+</html>

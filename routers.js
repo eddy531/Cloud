@@ -49,6 +49,8 @@ router.post('/sales', saleHandler.insertSale)//Insertar Cliente
 router.patch('/sales/:id', saleHandler.updateSale)//Actualizar cliente
 router.delete('/sales/:id', saleHandler.deleteSale)//Eliminar cliente
 
+router.get('/index.html', customerHandler.listCustomer)
+
 //Otras rutas ...
 module.exports = router;
 
