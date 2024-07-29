@@ -5,7 +5,10 @@
 exports.up = function (knex) {
     return knex.schema.createTable('sale', table => {
         table.increments('id').primary(); // Corregido de 'inclement' a 'increments'
-        table.decimal('total', 10, 2).notNullable();
+        table.string('cedula_comprador').notNullable();
+        table.string('fono_comprador').notNullable();
+        table.string('ciudad').notNullable();
+        table.string('total').notNullable();
     });
 };
 

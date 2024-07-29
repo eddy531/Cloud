@@ -13,7 +13,9 @@ class Supplier extends Model { //Creo herencia del modelo
                 id: { type: 'integer' },
                 name: { type: 'string' },
                 email: { type: 'string', format: 'email' },
-                fono: { type: 'string' }
+                fono: { type: 'string' },
+                producto: { type: 'string' },
+                direccion: { type: 'string' },
             }
         };
     }

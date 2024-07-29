@@ -13,7 +13,9 @@ class Product extends Model { //Creo herencia del modelo
                 id: { type: 'integer' },
                 name: { type: 'string' },
                 price: { type: 'string' },
-                stock: { type: 'string' }
+                categoria: { type: 'string' },
+                stock: { type: 'string' },
+                descripcion: { type: 'string' },
             }
         };
     }

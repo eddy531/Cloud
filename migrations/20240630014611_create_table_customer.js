@@ -7,7 +7,10 @@ exports.up = function (knex) {
         table.increments('id').primary();
         table.string('name').notNullable();
         table.string('email').notNullable().unique();
+        table.string('age').notNullable();
         table.string('fono').notNullable();
+        table.string('direccion').notNullable();
+
     });
 };
 

@@ -11,8 +11,11 @@ class Sale extends Model { //Creo herencia del modelo
 
             properties: {//estructura de los campos
                 id: { type: 'integer' },
-                total: { type: 'number' },
-                customer: { type: 'string' }
+                customer: { type: 'string' },
+                cedula_comprador: { type: 'string' },
+                fono_comprador: { type: 'string' },
+                cuidad: { type: 'string' },
+                total: { type: 'string' },
             }
         };
     }

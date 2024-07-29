@@ -8,7 +8,9 @@ exports.up = function (knex) {
         table.string('name').notNullable();
         table.string('email').notNullable().unique();
         table.string('position').notNullable();
-        table.decimal('salary', 10, 2).notNullable();
+        table.string('salary').notNullable();
+        table.string('jornada').notNullable();
+
     });
 };
 
