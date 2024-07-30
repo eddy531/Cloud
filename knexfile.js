@@ -8,7 +8,7 @@ module.exports = {
   development: {
     client: 'mysql2',
     connection: {
-      host: '3.86.35.155',
+      host: 'localhost',
       user: 'api_user1',
       password: '1234',
       database: 'cloude'
